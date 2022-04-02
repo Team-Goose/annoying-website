@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ItemContext } from "./App";
+// import { ItemContext } from "./App";
 import ResetItem, { ResetItemProps } from "./ResetItem";
 
 export default function ResetList() {
@@ -9,7 +9,7 @@ export default function ResetList() {
     { reason: "tried to burn plastic", date: "4 weeks" },
   ]);
 
-  const itemContext = useContext(ItemContext);
+  // const itemContext = useContext(ItemContext);
 
   useEffect(() => {
     if (rows.length > 3) {
@@ -17,7 +17,7 @@ export default function ResetList() {
     }
   }, [rows]);
 
-  useEffect(() => {}, [itemContext]);
+  // useEffect(() => {}, [itemContext]);
 
   return (
     <div className="flex flex-col items-center">
