@@ -1,15 +1,12 @@
-import { useContext, useEffect, useState } from "react";
-// import { ItemContext } from "./App";
+import { useEffect, useState } from "react";
 import ResetItem, { ResetItemProps } from "./ResetItem";
 
 export default function ResetList() {
   const [rows, setRows] = useState<ResetItemProps[]>([
-    { reason: "made a spicy pillow", date: "5 minutes" },
-    { reason: "started a fire", date: "2 days" },
-    { reason: "tried to burn plastic", date: "4 weeks" },
+    { reason: "made a spicy pillow", date: "2022-04-01 23:42:48.205680" },
+    { reason: "started a fire", date: "2022-04-01 23:44:23.082900" },
+    { reason: "tried to burn plastic", date: "2022-04-01 23:48:04.240771" },
   ]);
-
-  // const itemContext = useContext(ItemContext);
 
   useEffect(() => {
     if (rows.length > 3) {
@@ -17,7 +14,11 @@ export default function ResetList() {
     }
   }, [rows]);
 
-  // useEffect(() => {}, [itemContext]);
+  rows.push({
+    reason: "made a spicy pillow",
+    date: "2022-04-01 23:42:48.205680",
+  });
+  setRows(rows);
 
   return (
     <div className="flex flex-col items-center">

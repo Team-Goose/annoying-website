@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { getList } from "./api";
+import { deateToReadable, getList, resetListener } from "./api";
 import BigRedButton from "./BigRedButton";
 import { ResetItemProps } from "./ResetItem";
 import ResetList from "./ResetList";
@@ -14,13 +14,18 @@ export default function App() {
 
   // getList().then((items) => setItems(items));
 
-  const [lastResetTime, setLastResetTime] = useState("3 days");
+  const [lastResetTime, setLastResetTime] = useState<ResetItemProps>({
+    date: "2022-04-01 23:48:04.240771",
+    reason: "",
+  });
+  resetListener(setLastResetTime);
 
   return (
     // <ItemContext.Provider value={{ s: lastResetTime, f: setLastResetTime }}>
     <div className="w-screen h-screen flex flex-col bg-gray-900 text-white justify-center items-center">
       <h1 className="text-4xl font-bold">
-        Reetik has gone {lastResetTime} without breaking something.
+        Reetik has gone {deateToReadable(lastResetTime.date)} without breaking
+        something.
       </h1>
       <BigRedButton />
       <ResetList />
