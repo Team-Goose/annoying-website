@@ -1,12 +1,12 @@
 export interface ResetItemProps {
+  date: string;
   reason: string;
-  time: string;
 }
 
 export default function ResetItem(props: ResetItemProps) {
   return (
     <div>
-      Reetik {props.reason} {props.time} ago
+      Reetik {props.reason} {props.date} ago
     </div>
   );
 }

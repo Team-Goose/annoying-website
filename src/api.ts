@@ -2,8 +2,8 @@ import { ResetItemProps } from "./ResetItem";
 import * as mqtt from "mqtt";
 
 const client = mqtt.connect(
-  "tls://683943b84d234b53a615bdded84e101d.s1.eu.hivemq.cloud:8883", 
-  {"username": "reetik", "password": "BullyR33tik", protocol: "mqtts"}
+  "tls://683943b84d234b53a615bdded84e101d.s1.eu.hivemq.cloud:8883",
+  { username: "reetik", password: "BullyR33tik", protocol: "mqtts" }
 );
 
 export function submitReset(reason: string) {
@@ -18,4 +18,8 @@ export async function resetListener(callback: Function) {
 
 export async function getList(): Promise<ResetItemProps[]> {
   return [];
+}
+
+export function deateToReadable(date: Date): string {
+  return date.toLocaleString();
 }
