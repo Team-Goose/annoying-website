@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ResetItem, { ResetItemProps } from "./ResetItem";
 
 export default function ResetList() {
@@ -7,6 +7,14 @@ export default function ResetList() {
     { reason: "started a fire", time: "2 days" },
     { reason: "tried to burn plastic", time: "4 weeks" },
   ]);
+
+  useEffect(() => {
+    if (rows.length > 3) {
+      setRows(rows.slice(1));
+    }
+  }, [rows]);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="flex flex-col items-center">
