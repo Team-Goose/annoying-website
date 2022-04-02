@@ -1,24 +1,15 @@
-import { createContext, useContext, useState } from "react";
-import { deateToReadable, getList, resetListener } from "./api";
+import { useState } from "react";
+import { deateToReadable, setLastHook } from "./api";
 import BigRedButton from "./BigRedButton";
 import { ResetItemProps } from "./ResetItem";
 import ResetList from "./ResetList";
 
-// export const ItemContext = createContext<{ s: string; f: Function }>({
-//   s: "",
-//   f: () => {},
-// });
-
 export default function App() {
-  // const [items, setItems] = useState<ResetItemProps[]>([]);
-
-  // getList().then((items) => setItems(items));
-
   const [lastResetTime, setLastResetTime] = useState<ResetItemProps>({
     date: "2022-04-01 23:48:04.240771",
     reason: "",
   });
-  resetListener(setLastResetTime);
+  setLastHook((items) => setLastResetTime(items[0]));
 
   return (
     // <ItemContext.Provider value={{ s: lastResetTime, f: setLastResetTime }}>

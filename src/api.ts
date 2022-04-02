@@ -1,27 +1,47 @@
 import { ResetItemProps } from "./ResetItem";
 import * as mqtt from "mqtt";
 import moment from "moment";
+import { Client } from "paho-mqtt";
 
-const client = mqtt.connect(
-  "tls://683943b84d234b53a615bdded84e101d.s1.eu.hivemq.cloud:8883",
-  { username: "reetik", password: "BullyR33tik", protocol: "mqtts" }
-);
+// FRONTEND HOOOKS
+let lastHook = (s: ResetItemProps[]) => {};
+let listHook = (s: ResetItemProps[]) => {};
 
-export function submitReset(reason: string) {
-  client.publish("reetik/reset", JSON.stringify({ reason }));
+// LIST OF EVENTS TRACKED BY BACKEND, DONT USE THIS DIRECTLY
+let eventList: ResetItemProps[] = [];
+
+// DONT TOUCH THIS
+interface Hook {
+  (s: ResetItemProps[]): void;
 }
 
-export async function resetListener(callback: Function) {
-  client.subscribe("resets", () => {});
+// FOR FRONTEND TO CALL WHEN RENDERED
+export function setLastHook(f: Hook) {
+  lastHook = f;
+}
+export function setListHook(f: Hook) {
+  listHook = f;
 }
 
-export async function getList(): Promise<ResetItemProps[]> {
-  client.subscribe("reetik/need10", (err, granted) => {
-    console.log(granted);
-    return []; //return array generated in the callback
-  });
-  client.publish("reetik/need10", "gimme");
-  return []; // remove this
+// UPDATE LIST IN FRONTEND STATE
+
+// REPLACE ENTIRE LiST WITH NEW LIST
+export function updateList(newList: ResetItemProps[]) {
+  eventList = newList;
+  listHook(eventList);
+  lastHook(eventList);
+}
+
+// ADD NEW ITEM TO THE END OF THE LIST
+export function addEvent(e: ResetItemProps) {
+  eventList.push(e);
+  listHook(eventList);
+  lastHook(eventList);
+}
+
+// CALLED BY FRONTEND WHEN SUBMITTING
+export function submitEvent(event: ResetItemProps) {
+  // TODO: post to backend here
 }
 
 export function deateToReadable(d: string): string {

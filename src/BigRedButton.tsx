@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { submitReset } from "./api";
+import { submitEvent } from "./api";
 import { MdClose, MdSend } from "react-icons/md";
+import moment from "moment";
 
 export default function BigRedButton() {
   const [formMode, setFormMode] = useState(false);
@@ -19,7 +20,7 @@ export default function BigRedButton() {
                 const input = document.getElementById(
                   "reason"
                 ) as HTMLInputElement;
-                submitReset(input.value);
+                submitEvent({ date: moment().format(), reason: input.value });
                 setFormMode(false);
               }
             }}
@@ -31,7 +32,7 @@ export default function BigRedButton() {
                 const input = document.getElementById(
                   "reason"
                 ) as HTMLInputElement;
-                submitReset(input.value);
+                submitEvent({ date: moment().format(), reason: input.value });
                 setFormMode(false);
               }}
             >
