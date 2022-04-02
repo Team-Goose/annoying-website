@@ -2,7 +2,8 @@ import { ResetItemProps } from "./ResetItem";
 import * as mqtt from "mqtt";
 
 const client = mqtt.connect(
-  "mqtt://683943b84d234b53a615bdded84e101d.s1.eu.hivemq.cloud"
+  "tls://683943b84d234b53a615bdded84e101d.s1.eu.hivemq.cloud:8883", 
+  {"username": "reetik", "password": "BullyR33tik",}
 );
 
 export function submitReset(reason: string) {
